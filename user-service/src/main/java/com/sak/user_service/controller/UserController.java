@@ -25,7 +25,8 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public User signupUser(@ModelAttribute User user) {
-        return UserRepository.save(user);
+    public String signupUser(@ModelAttribute User user) {
+        UserRepository.save(user);
+        return "redirect:/users/signup";
     }
 }
