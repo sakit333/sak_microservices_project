@@ -16,4 +16,9 @@ public class WelcomeController {
     public String signup() {
         return "redirect:http://localhost:8082/users/signup";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "redirect:http://localhost:8083/auth/login";
+    }
 }

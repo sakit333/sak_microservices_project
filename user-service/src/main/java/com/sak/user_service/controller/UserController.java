@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.sak.user_service.repository.UserRepository;
-
 import com.sak.user_service.entity.User;
 
 @Controller
@@ -28,5 +27,16 @@ public class UserController {
     public String signupUser(@ModelAttribute User user) {
         UserRepository.save(user);
         return "redirect:/users/signup";
+    }
+
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("user", new User());
+        return "redirect:http://localhost:8083/auth/login";
+    }
+
+    @GetMapping("/")
+    public String home() {
+        return "redirect:http://localhost:8081";
     }
 }
