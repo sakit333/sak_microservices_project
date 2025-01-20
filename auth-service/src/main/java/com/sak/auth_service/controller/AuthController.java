@@ -56,4 +56,9 @@ public class AuthController {
         System.out.println("Signup Page from auth-service");
         return "redirect:http://localhost:8082/users/signup";  // Redirect to login page
     }
+
+    @GetMapping("/")
+    public String home() {
+        return "redirect:http://localhost:8081/";
+    }
 }
