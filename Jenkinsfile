@@ -29,14 +29,14 @@ pipeline {
                 }
             }
         }
-        stage('Build and Run Auth Service') {
+        stage('Build and Run Welcome Service') {
             steps {
                 script {
-                    // Build auth-service Docker image
-                    docker.build('auth-service-image', './auth-service')
+                    // Build welcome-service Docker image
+                    docker.build('welcome-service-image', './welcome-service')
 
-                    // Run the auth-service container on port 8081
-                    docker.image('auth-service-image').run("-d --network ${DOCKER_NETWORK} -p 8081:8081")
+                    // Run the welcome-service container on port 8083
+                    docker.image('welcome-service-image').run("-d --network ${DOCKER_NETWORK} -p 8081:8081")
                 }
             }
         }
@@ -51,14 +51,14 @@ pipeline {
                 }
             }
         }
-        stage('Build and Run Welcome Service') {
+        stage('Build and Run Auth Service') {
             steps {
                 script {
-                    // Build welcome-service Docker image
-                    docker.build('welcome-service-image', './welcome-service')
+                    // Build auth-service Docker image
+                    docker.build('auth-service-image', './auth-service')
 
-                    // Run the welcome-service container on port 8083
-                    docker.image('welcome-service-image').run("-d --network ${DOCKER_NETWORK} -p 8083:8083")
+                    // Run the auth-service container on port 8081
+                    docker.image('auth-service-image').run("-d --network ${DOCKER_NETWORK} -p 8083:8083")
                 }
             }
         }
