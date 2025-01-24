@@ -15,6 +15,20 @@ pipeline {
                 }
             }
         }
+        stage('Create Docker Network') {
+            steps {
+                script {
+                    // Check if the Docker network exists, create if it doesn't
+                    def networkExists = sh(script: "docker network ls | grep -w ${DOCKER_NETWORK}", returnStatus: true) == 0
+                    if (!networkExists) {
+                        sh "docker network create ${DOCKER_NETWORK}"
+                        echo "Docker network ${DOCKER_NETWORK} created."
+                    } else {
+                        echo "Docker network ${DOCKER_NETWORK} already exists."
+                    }
+                }
+            }
+        }
         stage('Build and Run Auth Service') {
             steps {
                 script {
