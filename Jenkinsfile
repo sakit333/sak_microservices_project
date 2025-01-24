@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         GIT_CRED = 'git-cred' // GitHub token credentials ID
+        DOCKER_NETWORK = 'my_custom_network' // Custom network name
     }
 
     stages {
@@ -10,7 +11,7 @@ pipeline {
             steps {
                 script {
                     // Checkout code from GitHub
-                    git credentialsId: "${GIT_CRED}", url: 'https://github.com/tohidhanfi20/microservices_project.git', branch: 'main'
+                    git credentialsId: "${GIT_CRED}", url: 'https://github.com/tohidhanfi20/coorg_react_spring_mysql.git', branch: 'main'
                 }
             }
         }
@@ -21,7 +22,7 @@ pipeline {
                     docker.build('auth-service-image', './auth-service')
 
                     // Run the auth-service container on port 8081
-                    docker.image('auth-service-image').run('-d -p 8081:8080')
+                    docker.image('auth-service-image').run("-d --network ${DOCKER_NETWORK} -p 8081:8080")
                 }
             }
         }
@@ -32,7 +33,7 @@ pipeline {
                     docker.build('user-service-image', './user-service')
 
                     // Run the user-service container on port 8082
-                    docker.image('user-service-image').run('-d -p 8082:8080')
+                    docker.image('user-service-image').run("-d --network ${DOCKER_NETWORK} -p 8082:8080")
                 }
             }
         }
@@ -43,7 +44,7 @@ pipeline {
                     docker.build('welcome-service-image', './welcome-service')
 
                     // Run the welcome-service container on port 8083
-                    docker.image('welcome-service-image').run('-d -p 8083:8080')
+                    docker.image('welcome-service-image').run("-d --network ${DOCKER_NETWORK} -p 8083:8080")
                 }
             }
         }
