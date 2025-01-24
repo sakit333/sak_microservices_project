@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     // Checkout code from GitHub
-                    git credentialsId: "${GIT_CRED}", url: 'https://github.com/tohidhanfi20/coorg_react_spring_mysql.git', branch: 'main'
+                    git credentialsId: "${GIT_CRED}", url: 'https://github.com/tohidhanfi20/microservices_project.git', branch: 'main'
                 }
             }
         }
